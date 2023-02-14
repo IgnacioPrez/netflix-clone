@@ -1,35 +1,31 @@
 import styled from "styled-components";
 import NetflixLogo from "../../assets/img/Logonetflix.png";
 import infoDashboard from "../../utils/json/dashboard.utils.json";
-import { useId } from "react";
 import { Accordion } from "../../components/accordion";
 import listDashboard from "../../utils/json/dashboard.list.json";
+import { Link } from "react-router-dom";
+import { PublicRoutes } from "../../routes";
 
 const Dashboard = () => {
-  const moreId = useId();
-  const accordionId = useId();
   return (
     <Container>
       <ContainerHero>
         <HeroHead>
           <img src={NetflixLogo} alt="Netflix Logo" />
           <HeroHeadBtn>
-            <p>Iniciar sesion</p>
+            <Link to={PublicRoutes.LOGIN}>Iniciar sesion</Link>
           </HeroHeadBtn>
         </HeroHead>
         <HeroInfo>
           <h2>Peliculas y series ilimitadas y mucho más</h2>
           <p>Disfruta donde quieras. Cancela cuando quieras.</p>
-          <p>
-            ¿Quieres ver Netflix ya? Ingresa tu email para crear una cuenta o
-            reiniciar tu membresía de Netflix
-          </p>
+          <p>¿Quieres ver Netflix ya? Ingresa tu email para crear una cuenta o reiniciar tu membresía de Netflix</p>
         </HeroInfo>
       </ContainerHero>
       <ContainerCardMore>
         {infoDashboard.map((el) => {
           return (
-            <Card key={moreId}>
+            <Card key={el.title}>
               <img src={el.img} alt={el.title} />
               <div>
                 <p>{el.title}</p>
@@ -43,7 +39,7 @@ const Dashboard = () => {
         <h3>Preguntas frecuentes</h3>
         {listDashboard.map((el) => {
           return (
-            <Accordion title={el.ask} key={accordionId}>
+            <Accordion title={el.ask} key={el.id}>
               {el.description}
             </Accordion>
           );
@@ -94,31 +90,31 @@ export const ContainerFooter = styled.footer`
   display: flex;
   flex-direction: column;
   gap: 25px;
-  @media screen and (min-width: 320px) and (max-width:768px){
+  @media screen and (min-width: 320px) and (max-width: 768px) {
     height: auto;
-    padding:0;
+    padding: 0;
     padding: 1em;
   }
-  `;
+`;
 export const ListFooter = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding: .5em;
+  padding: 0.5em;
   width: 85%;
-  div{
+  div {
     display: flex;
     flex-direction: column;
     gap: 12px;
     font-size: small;
     padding: 1em;
-    p{
+    p {
       text-decoration: underline;
       cursor: pointer;
     }
   }
-  @media screen and (min-width: 320px) and (max-width:480px){
-    flex-direction:column;
+  @media screen and (min-width: 320px) and (max-width: 480px) {
+    flex-direction: column;
     width: 100%;
   }
 `;
@@ -138,8 +134,8 @@ export const ContainerList = styled.section`
     color: #fff;
     font-size: 47px;
   }
-  @media screen and (min-width: 320px) and (max-width:480px){
-    h3{
+  @media screen and (min-width: 320px) and (max-width: 480px) {
+    h3 {
       font-size: larger;
     }
   }
@@ -151,12 +147,7 @@ export const Container = styled.main`
 `;
 
 export const ContainerHero = styled.div`
-  background-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.8) 0,
-      rgba(0, 0, 0, 0) 60%,
-      rgba(0, 0, 0, 0.8) 100%
-    ),
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%),
     url("https://assets.nflxext.com/ffe/siteui/vlv3/3d6cf7c4-ad17-457a-b6cf-ea952926ba74/d9cacfda-1059-447d-be22-bdb885bc1f05/AR-es-20230206-popsignuptwoweeks-perspective_alpha_website_large.jpg");
   height: 35rem;
   width: 100%;
@@ -174,11 +165,10 @@ export const HeroHead = styled.div`
   justify-content: space-between;
   padding: 1.4em;
   align-items: center;
-  @media screen and (min-width: 320px) and (max-width:480px){
+  @media screen and (min-width: 320px) and (max-width: 480px) {
     img {
       width: 7rem;
     }
-
   }
 `;
 
@@ -201,33 +191,33 @@ export const HeroInfo = styled.div`
     font-size: 1.5rem;
   }
   width: 50em;
-  @media screen and (min-width: 320px) and (max-width:768px){
-    width:100%;
-    h2{
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    width: 100%;
+    h2 {
       font-size: larger;
     }
-    p{
+    p {
       font-size: medium;
     }
   }
-
 `;
 
 export const HeroHeadBtn = styled.div`
   width: 12rem;
   display: flex;
   justify-content: center;
-  p {
+  a {
     color: #fff;
     padding: 0.4em;
     border-radius: 5px;
     background-color: #e50914;
     width: 7rem;
     text-align: center;
+    text-decoration: none;
   }
-  @media screen and (min-width: 320px) and (max-width:480px){
-   width: 8rem;
-   padding: 0.3em;
+  @media screen and (min-width: 320px) and (max-width: 480px) {
+    width: 8rem;
+    padding: 0.3em;
   }
 `;
 
@@ -267,17 +257,17 @@ export const Card = styled.div`
   p:nth-child(2) {
     font-size: x-large;
   }
-  @media screen and (min-width: 320px) and (max-width:768px){
+  @media screen and (min-width: 320px) and (max-width: 768px) {
     width: 100%;
     flex-direction: column;
-    img{
+    img {
       height: 13rem;
       width: 50%;
     }
-    p:nth-child(1){
+    p:nth-child(1) {
       font-size: large;
     }
-    p:nth-child(2){
+    p:nth-child(2) {
       font-size: medium;
     }
   }
