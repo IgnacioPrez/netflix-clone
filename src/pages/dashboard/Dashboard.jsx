@@ -90,7 +90,7 @@ export const ContainerFooter = styled.footer`
   display: flex;
   flex-direction: column;
   gap: 25px;
-  @media screen and (min-width: 320px) and (max-width: 768px) {
+  @media (max-width: 768px) {
     height: auto;
     padding: 0;
     padding: 1em;
@@ -113,7 +113,7 @@ export const ListFooter = styled.div`
       cursor: pointer;
     }
   }
-  @media screen and (min-width: 320px) and (max-width: 480px) {
+  @media (max-width: 768px) {
     flex-direction: column;
     width: 100%;
   }
@@ -134,7 +134,7 @@ export const ContainerList = styled.section`
     color: #fff;
     font-size: 47px;
   }
-  @media screen and (min-width: 320px) and (max-width: 480px) {
+  @media (max-width: 768px) {
     h3 {
       font-size: larger;
     }
@@ -155,6 +155,10 @@ export const ContainerHero = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  @media (max-width:768px){
+    width: 100%;
+    height: 100vh;
+  }
 `;
 
 export const HeroHead = styled.div`
@@ -165,9 +169,9 @@ export const HeroHead = styled.div`
   justify-content: space-between;
   padding: 1.4em;
   align-items: center;
-  @media screen and (min-width: 320px) and (max-width: 480px) {
+  @media (max-width: 768px) {
     img {
-      width: 7rem;
+      width: 6.5rem;
     }
   }
 `;
@@ -191,7 +195,7 @@ export const HeroInfo = styled.div`
     font-size: 1.5rem;
   }
   width: 50em;
-  @media screen and (min-width: 320px) and (max-width: 768px) {
+  @media (max-width: 768px) {
     width: 100%;
     h2 {
       font-size: larger;
@@ -215,8 +219,8 @@ export const HeroHeadBtn = styled.div`
     text-align: center;
     text-decoration: none;
   }
-  @media screen and (min-width: 320px) and (max-width: 480px) {
-    width: 8rem;
+  @media (max-width: 768px) {
+    width: 7.5rem;
     padding: 0.3em;
   }
 `;
@@ -228,6 +232,7 @@ export const ContainerCardMore = styled.section`
   flex-direction: column;
   gap: 20px;
   background: inherit;
+
 `;
 
 export const Card = styled.div`
@@ -257,18 +262,18 @@ export const Card = styled.div`
   p:nth-child(2) {
     font-size: x-large;
   }
-  @media screen and (min-width: 320px) and (max-width: 768px) {
+  @media (max-width: 768px) {
     width: 100%;
     flex-direction: column;
     img {
-      height: 13rem;
+      height: 12rem;
       width: 50%;
     }
     p:nth-child(1) {
       font-size: large;
     }
     p:nth-child(2) {
-      font-size: medium;
+      font-size: small;
     }
   }
 `;

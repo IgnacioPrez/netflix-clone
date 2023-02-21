@@ -124,7 +124,7 @@ export const ContainerUser = styled.div`
     width: 2rem;
     svg {
       width: 100%;
-      transform: ${({viewUserOptions}) => viewUserOptions?  "rotate(180deg)" : "rotate(0deg)"};
+      transform: ${({viewUserOptions}) => viewUserOptions?  "rotate(180deg)" : "none"};
       transition: transform 367ms cubic-bezier(0.21, 0, 0.07, 1);
     }
   }
@@ -175,7 +175,7 @@ export const ContainerUserOptions = styled.ul`
       color: #e5e5e5;
     }
 }
-visibility: ${({viewUserOptions}) => viewUserOptions ? "hidden" : "visible"};
+visibility: ${({viewUserOptions}) => viewUserOptions ? "visibility" : "hidden"};
 `;
 export const ContainerSearch = styled.div`
   position: relative;
