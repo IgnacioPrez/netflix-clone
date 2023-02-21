@@ -1,12 +1,12 @@
 import { useId } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useValidate } from "../../hooks/useValidate";
 import { createUser } from "../../redux/state/user";
 import { PublicRoutes } from "../../routes";
 import { error, succes } from "../../utils/alertFunctions/alertFunction";
 import { Toaster } from "react-hot-toast";
 import { ContainerForm, ContainerLoginForm, Form } from "../../components/component-with-form";
+import { useValidate } from "../../hooks";
 
 
 const SignUp = () => {

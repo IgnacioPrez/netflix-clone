@@ -66,3 +66,4 @@ export const ContainerFormInfo = styled.div`
     width: 90%;
   }
 `;
+
