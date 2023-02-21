@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import {
   ContainerUser,
@@ -27,15 +27,29 @@ const LayoutHome = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [viewMobileNav, setviewMobileNav] = useToggle();
   const [viewUserOptions, setViewUserOptions] = useToggle();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   window.onscroll = () => {
     window.pageYOffset === 0 ? setIsScrolled(false) : setIsScrolled(true);
     return () => (window.onscroll = null);
   };
 
   const logoutUser = () => {
-    dispatch(logout())
-  }
+    dispatch(logout());
+  };
+
+  const handleClickMobileOne = () => {
+    if (viewUserOptions) {
+      setviewMobileNav(false);
+    }
+    setviewMobileNav(true);
+  };
+
+  const handleClickMobileTwo = () => {
+    if (viewMobileNav) {
+      setViewUserOptions(false);
+    }
+    setViewUserOptions(true);
+  };
 
   return (
     <ContainerHome>
@@ -53,7 +67,7 @@ const LayoutHome = () => {
               <li>Mi lista</li>
               <li>Explorar por idiomas</li>
             </ListOptions>
-            <span onClick={() => setviewMobileNav(!viewMobileNav)}>
+            <span onClick={handleClickMobileOne}>
               <MdOutlineArrowDropDown />
             </span>
           </Navbar>
@@ -64,10 +78,10 @@ const LayoutHome = () => {
             <input placeholder="Títulos, personas, géneros" />
             <FiSearch onClick={setToggle} />
           </ContainerSearch>
-          <ContainerUser  viewUserOptions={viewUserOptions}>
+          <ContainerUser viewUserOptions={viewUserOptions}>
             <CgBell />
-            <img src={UseerIcon} alt="icon user" />
-            <span onMouseOutCapture={()=> {setViewUserOptions(true)}} >
+            <img src={UseerIcon} alt="icon user" onClick={handleClickMobileTwo} />
+            <span>
               <MdOutlineArrowDropDown />
             </span>
             <ContainerUserOptions viewUserOptions={viewUserOptions}>

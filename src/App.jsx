@@ -5,7 +5,6 @@ import { AuthGard } from "./guards";
 import { Dashboard, Layout, RoutesWithNotFound } from "./pages";
 import { privateRoutes, PublicRoutes } from "./routes";
 const Login = lazy(() => import("./pages/login/Login"));
-const SignUp = lazy(() => import("./pages/signup/SignUp"));
 const Private = lazy(() => import("./pages/private/Private"));
 
 const App = () => {
@@ -18,7 +17,6 @@ const App = () => {
             <Route path={PublicRoutes.DASHBOARD} element={<Dashboard />} />
             <Route element={<Layout />}>
               <Route path={PublicRoutes.LOGIN} element={<Login />} />
-              <Route path={PublicRoutes.SIGNUP} element={<SignUp />} />
             </Route>
             <Route element={<AuthGard />}>
               <Route path={`${privateRoutes.PRIVATE}/*`} element={<Private />} />

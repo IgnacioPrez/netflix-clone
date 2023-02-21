@@ -1,17 +1,20 @@
-import { useState } from "react";
+import { useId} from "react";
 import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { ContainerForm, ContainerFormInfo, ContainerLoginForm, Form } from "../../components/component-with-form";
+import { useValidate } from "../../hooks";
 import { login } from "../../redux/state/user";
 import { privateRoutes, PublicRoutes } from "../../routes";
 import { error, succes } from "../../utils/alertFunctions/alertFunction";
 
 const Login = () => {
-  const [inputValue, setInputValue] = useState({ email: "", password: "" });
+  const  { inputValue, setInputValue,errorEmail ,errorPassword} = useValidate()
   const userState = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userId = useId();
+
   const handleInputChange = (e) => {
     setInputValue({
       ...inputValue,
@@ -20,8 +23,14 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login(inputValue));
-    if (userState.logged) {
+    dispatch(
+      login({
+        id: userId,
+        name: inputValue.name,
+        email: inputValue.email,
+        password: inputValue.password,
+      }))
+    if (!errorEmail && !errorPassword) {
       succes("Verificado correctamente");
       setTimeout(() => {
         navigate(`/${privateRoutes.PRIVATE}`, { replace: true });

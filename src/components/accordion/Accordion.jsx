@@ -26,7 +26,7 @@ const Title = styled.div`
   h4{
     color: #fff;
   }
-  @media screen and (min-width: 320px) and (max-width:480px){
+  @media (max-width:768px){
     h4{
       font-size: large;
     }

@@ -25,7 +25,7 @@ const Home = () => {
     dispatch(getAllFetching());
     dispatch(getAllTrending());
     dispatch(getAllTvSeason());
-  }, []);
+  }, []); 
   return (
     <>
       <HeroHome>
