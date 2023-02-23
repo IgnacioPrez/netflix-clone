@@ -1,12 +1,14 @@
-import { CardMovie, Trending, TvSeason } from "../../../components";
-import { HeroHomeInfo, HeroHome, RowMovies, ImageBox, HeroInfoDescription, BtnsHeroInfo } from "../../../components/component-for-home";
-import Loading from "../../../components/loading/Loading";
-import { useHero } from "../../../hooks";
-import { imageBaseUrl, trendingUrl } from "../../../services/movie.service";
 import { FaPlay } from "react-icons/fa";
 import { FiInfo } from "react-icons/fi";
-const Home = () => {
+import { BtnsHeroInfo, HeroHome, HeroHomeInfo, HeroInfoDescription, ImageBox, Loading } from "../../../components";
+import { ContainerInfinityScroll, ContainerInfityElement } from "../../../components/components-for-scroll";
+import { useHero, useScroll } from "../../../hooks";
+import { imageBaseUrl, trendingUrl } from "../../../services/movie.service";
+
+const TrendingPage = () => {
   const [items, activeIndex] = useHero(trendingUrl);
+  const [datas] = useScroll(trendingUrl);
+  const trending = datas;
   return (
     <>
       <HeroHome>
@@ -32,13 +34,15 @@ const Home = () => {
           )}
         </HeroHomeInfo>
       </HeroHome>
-      <RowMovies>
-        <CardMovie />
-        <Trending />
-        <TvSeason />
-      </RowMovies>
+      <ContainerInfinityScroll>
+        {trending.map((trendingMoment) => (
+          <ContainerInfityElement key={trendingMoment.id}>
+            <img alt={trendingMoment.title} src={`${imageBaseUrl}${trendingMoment.backdrop_path}`} />
+          </ContainerInfityElement>
+        ))}
+      </ContainerInfinityScroll>
     </>
   );
 };
 
-export default Home;
+export default TrendingPage;

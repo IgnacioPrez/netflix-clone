@@ -20,12 +20,11 @@ export const Slide = styled.div`
   flex-wrap: nowrap;
   gap: 25px;
   overflow: hidden;
-
   img {
     width: 15rem;
     height: 9rem;
+    cursor: pointer;
   }
-  transition: all 1s ease;
 `;
 
 export const BtnLeft = styled.button`

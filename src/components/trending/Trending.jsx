@@ -1,13 +1,15 @@
 import { useRef, useState } from "react";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
-import { useSelector } from "react-redux";
-import { imageBaseUrl } from "../../services/movie.service";
+import { useGetData } from "../../hooks";
+import { imageBaseUrl, trendingUrl } from "../../services/movie.service";
 import { BtnLeft, BtnRight, ContainerCardImagesHome, Slide } from "../viewCard";
 
 const Trending = () => {
   const listRefTwo = useRef();
   const [isMoved, setIsMoved] = useState(false);
-  const trendingState = useSelector(state => state.trending)
+  const [getData] = useGetData(trendingUrl)
+  const trendingState = getData
+
   const handleClick = (direction) => {
     setIsMoved(true);
     if (listRefTwo.current) {
@@ -15,6 +17,7 @@ const Trending = () => {
       const scrollTo = direction === "left" ? scrollLeft - clientWidth : scrollLeft + clientWidth;
       listRefTwo.current.scrollTo({left:scrollTo,behavior:"smooth"})
     }
+    
   };
   return (
     <ContainerCardImagesHome>

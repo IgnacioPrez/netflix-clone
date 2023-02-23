@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { baseUrl, MyKey, trendingUrl } from "../../services/movie.service";
+import { baseUrl, MyKey } from "../../services/movie.service";
 import { getServices } from "../../services/fetchinOfDates";
 
-export function useHero() {
+export function useHero(newUrl) {
   const [{ items, activeIndex }, setState] = useState({
     items: [],
     activeIndex: 0,
@@ -10,7 +10,7 @@ export function useHero() {
   const [number, setNumber] = useState(0);
 
    const getImages = async () => {
-    const data = await getServices(baseUrl + trendingUrl, MyKey);
+    const data = await getServices(baseUrl + newUrl, MyKey);
     setState((state) => ({
       ...state,
       items: data,
@@ -29,9 +29,7 @@ export function useHero() {
       setNumber(number + 1);
     }, 20000);
     if (newIndex === -1) {
-      setTimeout(() => {
         setState((s) => ({ ...s, activeIndex: items.length - 1 }));
-      }, 20000);
       return;
     }
     if (newIndex === items.length) {

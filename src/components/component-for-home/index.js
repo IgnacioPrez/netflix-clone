@@ -36,11 +36,11 @@ export const ContainerLogoandNav = styled.div`
   }
   @media (max-width: 768px) {
     height: 100%;
-    width: 30%;
+    width: 35%;
     justify-content: center;
     gap: 4px;
     img {
-      width: 4.2rem;
+      width: 5rem;
     }
   }
 `;
@@ -71,8 +71,15 @@ export const ListOptions = styled.ul`
   cursor: pointer;
   font-size: 1rem;
   li {
-    &:hover {
-      color: #e5e5e5;
+    a {
+      color: #fff;
+      text-decoration: none;
+      &:hover {
+        color: #e5e5e5;
+      }
+      &:visited {
+        color: #fff;
+      }
     }
   }
   @media (max-width: 768px) {
@@ -103,6 +110,7 @@ export const ContainerUserAndSearch = styled.div`
     width: 75%;
     gap: 2px;
     height: 100%;
+    padding: 3px;
   }
 `;
 export const ContainerUser = styled.div`
@@ -124,7 +132,7 @@ export const ContainerUser = styled.div`
     width: 2rem;
     svg {
       width: 100%;
-      transform: ${({viewUserOptions}) => viewUserOptions?  "rotate(180deg)" : "none"};
+      transform: ${({ viewUserOptions }) => (viewUserOptions ? "rotate(180deg)" : "none")};
       transition: transform 367ms cubic-bezier(0.21, 0, 0.07, 1);
     }
   }
@@ -151,20 +159,20 @@ export const ContainerUserOptions = styled.ul`
   flex-direction: column;
   justify-content: center;
   gap: 30px;
-  padding: .5em;
-  li{
+  padding: 0.5em;
+  li {
     list-style: none;
     display: flex;
     gap: 10px;
     align-items: center;
-    &:nth-child(5){
+    &:nth-child(5) {
       border-top: 1px solid grey;
     }
   }
   background-color: rgba(0, 0, 0, 0.9);
   top: 50px;
   right: 35px;
-  button{
+  button {
     background: none;
     color: inherit;
     width: 100%;
@@ -174,8 +182,8 @@ export const ContainerUserOptions = styled.ul`
     &:hover {
       color: #e5e5e5;
     }
-}
-visibility: ${({viewUserOptions}) => viewUserOptions ? "visibility" : "hidden"};
+  }
+  visibility: ${({ viewUserOptions }) => (viewUserOptions ? "visibility" : "hidden")};
 `;
 export const ContainerSearch = styled.div`
   position: relative;
@@ -208,7 +216,7 @@ export const ContainerSearch = styled.div`
     svg {
       font-size: 1.2rem;
       transform: translate(0, 30%);
-      top: 10%;
+      top: 15%;
     }
     input {
       padding: 0;
