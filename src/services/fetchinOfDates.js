@@ -1,6 +1,6 @@
 export const getServices = async (url,key) => {
     try {
-        const response = await fetch(`${url}?api_key=${key}`)
+        const response = await fetch(`${url}?api_key=${key}&language=es`)
         const {results} = await response.json()
         return results
     }

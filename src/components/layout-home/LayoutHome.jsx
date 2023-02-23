@@ -22,6 +22,7 @@ import { FaRegQuestionCircle } from "react-icons/fa";
 import { BiTransfer } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/state/user";
+
 const LayoutHome = () => {
   const [toggle, setToggle] = useToggle();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -60,10 +61,20 @@ const LayoutHome = () => {
           </Link>
           <Navbar viewMobileNav={viewMobileNav}>
             <ListOptions viewMobileNav={viewMobileNav}>
-              <li>Inicio</li>
-              <li>Serie</li>
-              <li>Peliculas</li>
-              <li>Novedades populares</li>
+              <li>
+                <Link to={privateRoutes.HOME}>Inicio</Link>
+              </li>
+              <li>
+                <Link to={privateRoutes.TVSHOWS}>Series</Link>
+              </li>
+              <li>
+              <Link to={privateRoutes.MOVIES}>Películas</Link>
+
+              </li>
+              <li>
+              <Link to={privateRoutes.TRENDING}>Novedades populares</Link>
+
+              </li>
               <li>Mi lista</li>
               <li>Explorar por idiomas</li>
             </ListOptions>
