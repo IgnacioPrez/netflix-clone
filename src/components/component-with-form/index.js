@@ -42,6 +42,9 @@ export const Form = styled.form`
     margin-top: 2em;
     cursor: pointer;
   }
+  span{
+    color: #e50914;
+  }
 `;
 export const ContainerLoginForm = styled.div`
   width: 100%;
@@ -54,14 +57,15 @@ export const ContainerLoginForm = styled.div`
 export const ContainerFormInfo = styled.div`
   display: flex;
   color: #fff;
+  justify-content: center;
   gap: 7px;
   p {
     color: #737373;
+    &:nth-child(2){
+      color: #fff;
+    }
   }
-  a {
-    text-decoration: none;
-    color: #fff;
-  }
+
   @media screen and (min-width: 320px) and (max-width: 468px) {
     width: 90%;
   }

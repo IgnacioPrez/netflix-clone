@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import {
   ContainerUser,
@@ -28,6 +28,7 @@ const LayoutHome = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [viewMobileNav, setviewMobileNav] = useToggle();
   const [viewUserOptions, setViewUserOptions] = useToggle();
+  const listNavRef = useRef()
   const dispatch = useDispatch();
   window.onscroll = () => {
     window.pageYOffset === 0 ? setIsScrolled(false) : setIsScrolled(true);
@@ -37,21 +38,19 @@ const LayoutHome = () => {
   const logoutUser = () => {
     dispatch(logout());
   };
-
   const handleClickMobileOne = () => {
     if (viewUserOptions) {
       setviewMobileNav(false);
     }
-    setviewMobileNav(true);
+    setviewMobileNav(true)
   };
-
   const handleClickMobileTwo = () => {
     if (viewMobileNav) {
       setViewUserOptions(false);
     }
+  
     setViewUserOptions(true);
   };
-
   return (
     <ContainerHome>
       <HeadNavigatorHome isScrolled={isScrolled}>
@@ -62,18 +61,16 @@ const LayoutHome = () => {
           <Navbar viewMobileNav={viewMobileNav}>
             <ListOptions viewMobileNav={viewMobileNav}>
               <li>
-                <Link to={privateRoutes.HOME}>Inicio</Link>
+                <Link to={privateRoutes.HOME} onClick={() => {setviewMobileNav(false)}}>Inicio</Link>
               </li>
               <li>
-                <Link to={privateRoutes.TVSHOWS}>Series</Link>
+                <Link to={privateRoutes.TVSHOWS} onClick={() => {setviewMobileNav(false)}}>Series</Link>
               </li>
               <li>
-              <Link to={privateRoutes.MOVIES}>Películas</Link>
-
+                <Link to={privateRoutes.MOVIES} onClick={() => {setviewMobileNav(false)}}>Películas</Link>
               </li>
               <li>
-              <Link to={privateRoutes.TRENDING}>Novedades populares</Link>
-
+                <Link to={privateRoutes.TRENDING} onClick={() => {setviewMobileNav(false)}}>Novedades populares</Link>
               </li>
               <li>Mi lista</li>
               <li>Explorar por idiomas</li>
