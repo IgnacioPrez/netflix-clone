@@ -8,7 +8,6 @@ export function useHero(newUrl) {
     activeIndex: 0,
   });
   const [number, setNumber] = useState(0);
-
    const getImages = async () => {
     const data = await getServices(baseUrl + newUrl, MyKey);
     setState((state) => ({
@@ -19,25 +18,23 @@ export function useHero(newUrl) {
   useEffect(() => {
     getImages();
   }, []); 
-
+  
   useEffect(() => {
     moveTo(number);
   }, [number]);
 
   const moveTo = (newIndex) => {
     setTimeout(() => {
-      setNumber(number + 1);
+        setNumber(number + 1);
     }, 20000);
-    if (newIndex === -1) {
-        setState((s) => ({ ...s, activeIndex: items.length - 1 }));
-      return;
-    }
+
     if (newIndex === items.length) {
-        setState((s) => ({ ...s, activeIndex: 0 }));
+        setState((s) => ({ ...s, activeIndex: newIndex - items.length }));
+        setNumber( number - items.length)
       return;
     }
 
-    setState((s) => ({ ...s, activeIndex: newIndex }));
+    setState((s) => ({ ...s, activeIndex: newIndex })); 
   };
 
   return [items, activeIndex];

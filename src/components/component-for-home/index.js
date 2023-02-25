@@ -185,7 +185,7 @@ export const ContainerUserOptions = styled.ul`
   }
   visibility: ${({ viewUserOptions }) => (viewUserOptions ? "visibility" : "hidden")};
 `;
-export const ContainerSearch = styled.div`
+export const ContainerSearch = styled.form`
   position: relative;
   height: 2.7rem;
   input {
