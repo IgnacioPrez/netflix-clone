@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import {
   ContainerUser,
@@ -22,35 +22,50 @@ import { FaRegQuestionCircle } from "react-icons/fa";
 import { BiTransfer } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/state/user";
-
+import { Loading } from "../loading";
+import { useMovies } from "../../hooks/useMovie/useMovies";
+import useSearch from "../../hooks/useSearch/useSearch";
+import { RowCardSearch } from "../row-card-search";
 const LayoutHome = () => {
   const [toggle, setToggle] = useToggle();
   const [isScrolled, setIsScrolled] = useState(false);
   const [viewMobileNav, setviewMobileNav] = useToggle();
   const [viewUserOptions, setViewUserOptions] = useToggle();
-  const listNavRef = useRef()
   const dispatch = useDispatch();
+  const { query, setQuery, errorMessage } = useSearch();
+
+  const { searchElement, getMovies, loading } = useMovies(query);
+
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+  };
+  const HandleSubmit = (e) => {
+    e.preventDefault();
+    getMovies();
+  };
   window.onscroll = () => {
     window.pageYOffset === 0 ? setIsScrolled(false) : setIsScrolled(true);
     return () => (window.onscroll = null);
   };
 
   const logoutUser = () => {
-    dispatch(logout());
+    setTimeout(() => {
+      dispatch(logout());
+    }, 2000);
   };
   const handleClickMobileOne = () => {
     if (viewUserOptions) {
       setviewMobileNav(false);
     }
-    setviewMobileNav(true)
+    setviewMobileNav(true);
   };
   const handleClickMobileTwo = () => {
     if (viewMobileNav) {
       setViewUserOptions(false);
     }
-  
     setViewUserOptions(true);
   };
+
   return (
     <ContainerHome>
       <HeadNavigatorHome isScrolled={isScrolled}>
@@ -61,19 +76,59 @@ const LayoutHome = () => {
           <Navbar viewMobileNav={viewMobileNav}>
             <ListOptions viewMobileNav={viewMobileNav}>
               <li>
-                <Link to={privateRoutes.HOME} onClick={() => {setviewMobileNav(false)}}>Inicio</Link>
+                <Link
+                  to={privateRoutes.HOME}
+                  onClick={() => {
+                    setviewMobileNav(false);
+                  }}
+                >
+                  Inicio
+                </Link>
               </li>
               <li>
-                <Link to={privateRoutes.TVSHOWS} onClick={() => {setviewMobileNav(false)}}>Series</Link>
+                <Link
+                  to={privateRoutes.TVSHOWS}
+                  onClick={() => {
+                    setviewMobileNav(false);
+                  }}
+                >
+                  Series
+                </Link>
               </li>
               <li>
-                <Link to={privateRoutes.MOVIES} onClick={() => {setviewMobileNav(false)}}>Películas</Link>
+                <Link
+                  to={privateRoutes.MOVIES}
+                  onClick={() => {
+                    setviewMobileNav(false);
+                  }}
+                >
+                  Películas
+                </Link>
               </li>
               <li>
-                <Link to={privateRoutes.TRENDING} onClick={() => {setviewMobileNav(false)}}>Novedades populares</Link>
+                <Link
+                  to={privateRoutes.TRENDING}
+                  onClick={() => {
+                    setviewMobileNav(false);
+                  }}
+                >
+                  Novedades populares
+                </Link>
               </li>
-              <li>Mi lista</li>
-              <li>Explorar por idiomas</li>
+              <li
+                onClick={() => {
+                  setviewMobileNav(false);
+                }}
+              >
+                Mi lista
+              </li>
+              <li
+                onClick={() => {
+                  setviewMobileNav(false);
+                }}
+              >
+                Explorar por idiomas
+              </li>
             </ListOptions>
             <span onClick={handleClickMobileOne}>
               <MdOutlineArrowDropDown />
@@ -82,9 +137,12 @@ const LayoutHome = () => {
         </ContainerLogoandNav>
 
         <ContainerUserAndSearch>
-          <ContainerSearch toggle={toggle}>
-            <input placeholder="Títulos, personas, géneros" />
-            <FiSearch onClick={setToggle} />
+          <ContainerSearch toggle={toggle} onSubmit={HandleSubmit}>
+            <input id="searchId" placeholder="Títulos, personas, géneros" onChange={handleChange} value={query} />
+            <label htmlFor="searchId">
+              <FiSearch onClick={setToggle} />
+            </label>
+            {errorMessage && <span style={{ color: "red", width: "100%" }}>{errorMessage}</span>}
           </ContainerSearch>
           <ContainerUser viewUserOptions={viewUserOptions}>
             <CgBell />
@@ -116,7 +174,7 @@ const LayoutHome = () => {
           </ContainerUser>
         </ContainerUserAndSearch>
       </HeadNavigatorHome>
-      <Outlet></Outlet>
+      {!query.length ? <Outlet></Outlet> : loading ? <Loading /> : <RowCardSearch searchElement={searchElement} />}
     </ContainerHome>
   );
 };

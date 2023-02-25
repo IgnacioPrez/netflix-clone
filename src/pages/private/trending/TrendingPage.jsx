@@ -1,14 +1,27 @@
+import { useEffect, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { FiInfo } from "react-icons/fi";
 import { BtnsHeroInfo, HeroHome, HeroHomeInfo, HeroInfoDescription, ImageBox, Loading } from "../../../components";
 import { ContainerInfinityScroll, ContainerInfityElement } from "../../../components/components-for-scroll";
 import { useHero, useScroll } from "../../../hooks";
-import { imageBaseUrl, trendingUrl } from "../../../services/movie.service";
+import { baseUrl, imageBaseUrl, trendingUrl, MyKey } from "../../../services/movie.service";
 
 const TrendingPage = () => {
   const [items, activeIndex] = useHero(trendingUrl);
-  const [datas] = useScroll(trendingUrl);
-  const trending = datas;
+  const [trending, setTrending] = useState([]);
+  const [pages] = useScroll();
+  const getfilesData = (url) => {
+    let newUrl = `${baseUrl}${url}?api_key=${MyKey}&page=${pages}`;
+    fetch(newUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        let newData = trending.concat(data.results);
+        setTrending(newData);
+      });
+  };
+  useEffect(() => {
+    getfilesData(trendingUrl);
+  }, [pages]);
   return (
     <>
       <HeroHome>
