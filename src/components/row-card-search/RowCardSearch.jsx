@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { imageBaseUrl } from "../../services/movie.service";
 import ImageSrcReplace from "../../assets/netflix-1-logo-svgrepo-com.svg";
 const RowCardSearch = ({ searchElement }) => {
-  console.log(searchElement);
   return (
     <ContainerRowSearch>
       <RowSearch>

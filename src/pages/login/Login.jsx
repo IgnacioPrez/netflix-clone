@@ -61,7 +61,7 @@ const Login = () => {
       }, 2000);
     }
     else {
-      error("Datos invalidos")
+      error("La contraseña debe contener más de 8 caracteres, una Mayuscula y un simbolo")
     }
   };
   return (

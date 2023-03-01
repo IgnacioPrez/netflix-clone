@@ -9,7 +9,7 @@ import { baseUrl, discoverUrl, imageBaseUrl, MyKey } from "../../../services/mov
 const MoviesPage = () => {
   const [items, activeIndex] = useHero(discoverUrl);
   const [pages] = useScroll();
-  const [movies,setMovies] = useState([])
+  const [movies, setMovies] = useState([]);
   const getfilesMovies = (url) => {
     let newUrl = `${baseUrl}${url}?api_key=${MyKey}&page=${pages}`;
     fetch(newUrl)
@@ -20,12 +20,12 @@ const MoviesPage = () => {
       });
   };
   useEffect(() => {
-    getfilesMovies(discoverUrl)
-  },[pages])
-  
+    getfilesMovies(discoverUrl);
+  }, [pages]);
+
   return (
     <>
-       <HeroHome>
+      <HeroHome>
         {!items.length ? <Loading /> : <ImageBox posterBackground={`${imageBaseUrl}${items[activeIndex].backdrop_path}`}></ImageBox>}
         <HeroHomeInfo>
           {!items.length ? (
@@ -54,7 +54,7 @@ const MoviesPage = () => {
             <img alt={movie.title} src={`${imageBaseUrl}${movie.backdrop_path}`} />
           </ContainerInfityElement>
         ))}
-      </ContainerInfinityScroll> 
+      </ContainerInfinityScroll>
     </>
   );
 };
