@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import {
   ContainerUser,
@@ -26,6 +26,8 @@ import { Loading } from "../loading";
 import { useMovies } from "../../hooks/useMovie/useMovies";
 import useSearch from "../../hooks/useSearch/useSearch";
 import { RowCardSearch } from "../row-card-search";
+import debounce from "just-debounce-it";
+
 const LayoutHome = () => {
   const [toggle, setToggle] = useToggle();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,14 +36,23 @@ const LayoutHome = () => {
   const dispatch = useDispatch();
   const { query, setQuery, errorMessage } = useSearch();
 
-  const { searchElement, getMovies, loading } = useMovies(query);
+  const { searchElement, getMovies, loading } = useMovies({ query });
+  const debouncedGetMovies = useCallback(
+    debounce(search => {
+      getMovies({ query:search })
+    }, 300)
+    , [getMovies]
+  )
 
   const handleChange = (e) => {
-    setQuery(e.target.value);
+    const newSearch = e.target.value;
+    setQuery(newSearch);
+    debouncedGetMovies(newSearch);
   };
+
   const HandleSubmit = (e) => {
     e.preventDefault();
-    getMovies();
+    getMovies({ query });
   };
   window.onscroll = () => {
     window.pageYOffset === 0 ? setIsScrolled(false) : setIsScrolled(true);

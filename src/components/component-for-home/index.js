@@ -208,14 +208,14 @@ export const ContainerSearch = styled.form`
     position: absolute;
     left: 0;
     font-size: 1.5rem;
-    transform: translate(0, 30%);
+    transform: translate(0, 50%);
     left: 0.3rem;
     cursor: pointer;
   }
   @media (max-width: 768px) {
     svg {
       font-size: 1.2rem;
-      transform: translate(0, 30%);
+      transform: translate(0,20%);
       top: 15%;
     }
     input {

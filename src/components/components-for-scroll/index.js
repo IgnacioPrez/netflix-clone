@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ContainerInfinityScroll = styled.section`
   width: 100vw;
-  height: auto;
+  height: ${({loading}) => loading ? "50em" : "auto"};
   padding: 1em;
   background: #141414;
   display: flex;

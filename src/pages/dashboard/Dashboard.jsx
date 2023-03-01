@@ -17,7 +17,7 @@ const Dashboard = () => {
           </HeroHeadBtn>
         </HeroHead>
         <HeroInfo>
-          <h2>Peliculas y series ilimitadas y mucho más</h2>
+          <h2>Películas y series ilimitadas y mucho más</h2>
           <p>Disfruta donde quieras. Cancela cuando quieras.</p>
           <p>¿Quieres ver Netflix ya? Ingresa tu email para crear una cuenta o reiniciar tu membresía de Netflix</p>
         </HeroInfo>
