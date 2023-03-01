@@ -208,7 +208,7 @@ export const ContainerSearch = styled.form`
     position: absolute;
     left: 0;
     font-size: 1.5rem;
-    transform: translate(0, 50%);
+    transform: translate(0, 40%);
     left: 0.3rem;
     cursor: pointer;
   }

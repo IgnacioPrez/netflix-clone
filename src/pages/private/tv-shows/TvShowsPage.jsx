@@ -1,30 +1,18 @@
-import { useEffect, useState } from 'react'
-import { FaPlay } from 'react-icons/fa'
-import { FiInfo } from 'react-icons/fi'
-import { BtnsHeroInfo, HeroHome, HeroHomeInfo, HeroInfoDescription, ImageBox, Loading } from '../../../components'
-import { ContainerInfinityScroll, ContainerInfityElement } from '../../../components/components-for-scroll'
-import { useHero, useScroll } from '../../../hooks'
-import {baseUrl, imageBaseUrl,MyKey,trendingTvUrl} from "../../../services/movie.service"
+import { useState } from "react";
+import { FaPlay } from "react-icons/fa";
+import { FiInfo } from "react-icons/fi";
+import { BtnsHeroInfo, HeroHome, HeroHomeInfo, HeroInfoDescription, ImageBox, Loading } from "../../../components";
+import { ContainerInfinityScroll, ContainerInfityElement } from "../../../components/components-for-scroll";
+import { useHero, useScroll } from "../../../hooks";
+import { imageBaseUrl, trendingTvUrl } from "../../../services/movie.service";
 const TvShowsPage = () => {
   const [items, activeIndex] = useHero(trendingTvUrl);
-  const [pages] = useScroll(trendingTvUrl);
-  const [series,setSeries] = useState([])
+  const [series, setSeries] = useState([]);
+  const { loading } = useScroll(series, setSeries, trendingTvUrl);
 
-  const getfilesSeries = (url) => {
-    let newUrl = `${baseUrl}${url}?api_key=${MyKey}&page=${pages}`;
-    fetch(newUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        let newData = series.concat(data.results);
-        setSeries(newData);
-      });
-  };
-  useEffect(() => {
-    getfilesSeries(trendingTvUrl)
-  },[pages])
   return (
     <>
-       <HeroHome>
+      <HeroHome>
         {!items.length ? <Loading /> : <ImageBox posterBackground={`${imageBaseUrl}${items[activeIndex].backdrop_path}`}></ImageBox>}
         <HeroHomeInfo>
           {!items.length ? (
@@ -51,11 +39,12 @@ const TvShowsPage = () => {
         {series.map((tvShow) => (
           <ContainerInfityElement key={tvShow.id}>
             <img alt={tvShow.title} src={`${imageBaseUrl}${tvShow.backdrop_path}`} />
+            {loading && <Loading />}
           </ContainerInfityElement>
         ))}
-      </ContainerInfinityScroll> 
+      </ContainerInfinityScroll>
     </>
-  )
-}
+  );
+};
 
-export default TvShowsPage
+export default TvShowsPage;
